@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema Loteria
 
-## Getting Started
+## Sumário
+1. [Visão Geral](#visão-geral)
+2. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+3. [Arquitetura do Sistema](#arquitetura-do-sistema)
+4. [Configuração do Ambiente](#configuração-do-ambiente)
+5. [Estrutura do Projeto](#estrutura-do-projeto)
+6. [Guia de Instalação](#guia-de-instalação)
+7. [Desenvolvimento](#desenvolvimento)
+8. [Testes](#testes)
+9. [Deployment](#deployment)
+10. [Manutenção](#manutenção)
+11. [Documentação Adicional](#documentação-adicional)
+12. [Contribuição](#contribuição)
+13. [Suporte](#suporte)
+14. [Licença](#licença)
 
-First, run the development server:
+## Visão Geral
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O Sistema Loteria é uma plataforma completa de gerenciamento de loterias, projetada para oferecer uma solução robusta e escalável para administradores, operadores e usuários de sistemas de loteria. Nossa aplicação permite o gerenciamento eficiente de áreas de operação, sorteios, bilhetes e usuários, proporcionando uma experiência segura e intuitiva para todos os envolvidos.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Principais Características
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Gerenciamento de áreas de operação (cidades/estados)
+- Sistema de usuários com múltiplos níveis de acesso
+- Criação e administração de sorteios
+- Venda e verificação de bilhetes
+- Geração de QR Codes para bilhetes
+- Sistema de validação de prêmios
+- Geração de relatórios detalhados
+- Interface administrativa completa
+- API RESTful para integração com outros sistemas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tecnologias Utilizadas
 
-## Learn More
+- **Backend:**
+  - Node.js (v14+)
+  - Express.js
+  - TypeScript
+  - MongoDB com Mongoose
+  - JSON Web Tokens (JWT) para autenticação
+- **Frontend:**
+  - React.js
+  - Next.js
+  - Tailwind CSS
+- **Ferramentas de Desenvolvimento:**
+  - Docker
+  - ESLint
+  - Prettier
+  - Jest para testes
+- **Outras Tecnologias:**
+  - QRCode para geração de códigos QR
+  - PDFKit para geração de PDFs
+  - bcrypt para hashing de senhas
+  - crypto para criptografia de dados sensíveis
 
-To learn more about Next.js, take a look at the following resources:
+## Arquitetura do Sistema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O Sistema Loteria segue uma arquitetura de microserviços, dividida em três componentes principais:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **API Backend:** Responsável por toda a lógica de negócios, autenticação e interação com o banco de dados.
+2. **Frontend Web:** Interface de usuário para administradores, operadores e usuários finais.
+3. **Banco de Dados:** MongoDB para armazenamento persistente de dados.
 
-## Deploy on Vercel
+### Diagrama de Arquitetura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
