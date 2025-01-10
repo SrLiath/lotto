@@ -1,101 +1,151 @@
-import Image from "next/image";
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSignInAlt, faUserPlus, faTrophy, faInfoCircle, faCalendarAlt, faHome, faQuestionCircle } from "@fortawesome/free-solid-svg-icons"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activeTab, setActiveTab] = useState("home")
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const winners = [
+    { name: "João Silva", prize: "R$ 500.000" },
+    { name: "Maria Santos", prize: "R$ 250.000" },
+    { name: "Carlos Oliveira", prize: "R$ 100.000" },
+  ]
+
+  const lastDrawnNumbers = [5, 12, 18, 23, 30, 37, 42, 48, 53, 59]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-600 to-blue-500">
+      <header className="bg-white shadow-md">
+        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+          <h1 className="text-3xl font-bold text-green-600">SorteLegal</h1>
+          <nav>
+            <Button asChild variant="ghost" className="mr-2">
+              <Link href="/login">
+                <FontAwesomeIcon icon={faSignInAlt} className="mr-2" />
+                Entrar
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href="/register">
+                <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
+                Registrar
+              </Link>
+            </Button>
+          </nav>
         </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8">
+        <Tabs defaultValue="home" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="home" onClick={() => setActiveTab("home")}>
+              <FontAwesomeIcon icon={faHome} className="mr-2" />
+              Início
+            </TabsTrigger>
+            <TabsTrigger value="about" onClick={() => setActiveTab("about")}>
+              <FontAwesomeIcon icon={faInfoCircle} className="mr-2" />
+              Sobre Nós
+            </TabsTrigger>
+            <TabsTrigger value="how-it-works" onClick={() => setActiveTab("how-it-works")}>
+              <FontAwesomeIcon icon={faQuestionCircle} className="mr-2" />
+              Como Funciona
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="home">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <FontAwesomeIcon icon={faTrophy} className="mr-2" />
+                    Últimos Ganhadores
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul>
+                    {winners.map((winner, index) => (
+                      <li key={index} className="mb-2">
+                        {winner.name} - {winner.prize}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <FontAwesomeIcon icon={faTrophy} className="mr-2" />
+                    Últimos Números Sorteados
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {lastDrawnNumbers.map((number, index) => (
+                      <div key={index} className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white font-bold">
+                        {number}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <p className="text-2xl font-bold text-white text-center mt-8">
+              Prêmio Acumulado: R$ 5.000.000
+            </p>
+          </TabsContent>
+          <TabsContent value="about">
+            <Card className="mt-8">
+              <CardHeader>
+                <CardTitle>Sobre o SorteLegal</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  O SorteLegal é a sua plataforma confiável para jogos de loteria online.
+                  Fundado em 2023, nosso objetivo é proporcionar uma experiência de jogo
+                  segura, justa e emocionante para todos os nossos usuários.
+                </p>
+                <p className="mt-4">
+                  Com tecnologia de ponta e um compromisso inabalável com a transparência,
+                  garantimos que cada sorteio seja realizado com total integridade.
+                  Junte-se a nós e faça parte desta emocionante jornada rumo aos seus sonhos!
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="how-it-works">
+            <Card className="mt-8">
+              <CardHeader>
+                <CardTitle>Como Funciona</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ol className="list-decimal list-inside space-y-4">
+                  <li>Crie sua conta gratuitamente no SorteLegal.</li>
+                  <li>Escolha seus números da sorte para o próximo sorteio.</li>
+                  <li>Faça o pagamento seguro através de nossas opções disponíveis.</li>
+                  <li>Aguarde o sorteio, que acontece todas as terças, quintas e sábados às 20h.</li>
+                  <li>Confira os resultados em sua conta e, se for o ganhador, receba seu prêmio!</li>
+                </ol>
+                <p className="mt-4">
+                  É simples, seguro e emocionante. Comece a jogar hoje e boa sorte!
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-white mt-8 py-6">
+        <div className="container mx-auto px-4 text-center text-gray-600">
+          <p>&copy; 2023 SorteLegal. Todos os direitos reservados.</p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
+
