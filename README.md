@@ -171,3 +171,4 @@ sistema-loteria/
 ![tela](https://github.com/SrLiath/lotto/blob/1d9133afd3b85503067eaab134b0c7fc091c24d8/images/7.jpeg)
 ![tela](https://github.com/SrLiath/lotto/blob/1d9133afd3b85503067eaab134b0c7fc091c24d8/images/8.jpeg)
 ![tela](https://github.com/SrLiath/lotto/blob/1d9133afd3b85503067eaab134b0c7fc091c24d8/images/9.jpeg)
+#### Descontinuado
